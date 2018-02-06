@@ -1,4 +1,4 @@
-//package sample;
+package sample;//package sample;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -17,8 +17,10 @@ import javafx.scene.image.*;
 
 public class TicTacToeApp extends Application {
 
+
     //Tracks the turn, if it is not X's turn then it is O's turn
     private boolean isXturn = true;
+    //Checks if we are able to play or not
     private boolean ableToPlay = true;
 
     private Parent createContent() {
@@ -51,6 +53,22 @@ public class TicTacToeApp extends Application {
 
     }
 
+    private void checkState(){
+
+            //need to check the 3 horizontal, 3 vertivle, and 3 diagnals
+
+    }
+    private class Combo{
+        private Tile[] tiles;
+        public Combo(Tile...tiles){
+            this.tiles = tiles;
+        }
+
+        public boolean isComplete(){
+
+        }
+    }
+
     //Each of the squares on the grid
     private class Tile extends StackPane {
         //TODO find out how to replace that with an image
@@ -77,20 +95,31 @@ public class TicTacToeApp extends Application {
                 //On left mouse click. TODO Will need to change that for alternating turns.
                 if (event.getButton() == MouseButton.PRIMARY) {
 
+                    //If we are not able to play then stop
+                    if (ableToPlay == false){
+                        return;
+                    }
                     if (isXturn == true) {
 
                         drawX();
+                        checkState();
                         isXturn = false;
                         return;
                     }
                     if (isXturn == false) {
 
                         drawO();
+                        checkState();
                         isXturn = true;
                         return;
                     }
                 }
             });
+
+        }
+
+        public String getValue(){
+            return text.getText();
 
         }
 
